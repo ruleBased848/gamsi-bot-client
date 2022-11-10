@@ -2,6 +2,7 @@ import './App.css';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import RequestList from './components/RequestList';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Typography variant="h6">Gamsi Bot</Typography>
         </Toolbar>
       </AppBar>
+      <RequestList />
     </div>
   );
 }
