@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import Delete from '@mui/icons-material/Delete';
 import AddRequest from './AddRequest';
 
 function RequestList() {
@@ -50,13 +53,19 @@ function RequestList() {
       headerName: '',
       sortable: false,
       filterable: false,
-      renderCell: row => <button onClick={() => onDelClick(row.id)}>삭제</button>,
+      renderCell: row => (
+        <IconButton onClick={() => onDelClick(row.id)}>
+          <Delete color="error" />
+        </IconButton>
+      ),
     },
   ];
 
   return (
     <>
-      <AddRequest sendRequest={sendRequest} />
+      <Stack mt={2} mb={2}>
+        <AddRequest sendRequest={sendRequest} />
+      </Stack>
       <div style={{ height: 500, width: '100%' }}>
         <DataGrid
           rows={requests}
