@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
-function AddRequest({ sendRequest }) {
+function AddRequest({ login, finishSuccessfulRequest }) {
   const [open, setOpen] = useState(false);
   const [request, setRequest] = useState({
     channelId: '',
@@ -19,9 +19,37 @@ function AddRequest({ sendRequest }) {
 
   const handleClose = () => setOpen(false);
 
-  const handleAdd = () => sendRequest(request);
-
   const handleChange = event => setRequest({ ...request, [event.target.name]: event.target.value });
+
+  const alertMessageObject = messageObject => {
+    let message = '';
+    for (let [key, value] of Object.entries(messageObject)) {
+      message += `${key}: ${value}\n`;
+    }
+    alert(message);
+  };
+
+  const tryRequest = async request => {
+    const requestHeaders = { 'Content-Type': 'application/json' };
+    if (login) {
+      requestHeaders['JWT'] = sessionStorage.getItem('jwt');
+    }
+    const response = await fetch(process.env.REACT_APP_REQUEST_ENDPOINT, {
+      method: 'POST',
+      headers: requestHeaders,
+      body: JSON.stringify(request),
+    });
+    const json = await response.json();
+    return response.ok ? finishSuccessfulRequest(json) : alertMessageObject(json);
+  };
+
+  const handleAdd = () => {
+    if (request.channelId.trim().length === 0) return alert('유튜브 채널 ID는 필수 항목입니다');
+    if (request.emailAddress.length === 0) return alert('이메일 주소는 필수 항목입니다');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(request.emailAddress)) return alert('이메일 주소의 형식이 올바르지 않습니다');
+    tryRequest(request);
+  };
 
   return (
     <div>
