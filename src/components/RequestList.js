@@ -1,10 +1,23 @@
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { DataGrid } from '@mui/x-data-grid';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Delete from '@mui/icons-material/Delete';
 import AddRequest from './AddRequest';
+import { loginState } from '../states/login';
+import { requestsState } from '../states/requests';
 
-function RequestList({ requests, login, deleteRequest, finishSuccessfulRequest }) {
+function RequestList() {
+  const login = useRecoilValue(loginState);
+  const [requests, setRequests] = useRecoilState(requestsState);
+
+  const deleteRequest = (id, success) => {
+    if (!success) {
+      alert('존재하지 않는 요청입니다');
+    }
+    setRequests(requests => requests.filter(request => request.id !== id));
+  };
+
   const onDelClick = async id => {
     const requestHeaders = {};
     if (login) {
@@ -39,7 +52,7 @@ function RequestList({ requests, login, deleteRequest, finishSuccessfulRequest }
   return (
     <>
       <Stack mt={2} mb={2}>
-        <AddRequest login={login} finishSuccessfulRequest={finishSuccessfulRequest} />
+        <AddRequest />
       </Stack>
       <div style={{ height: 500, width: '100%' }}>
         <DataGrid

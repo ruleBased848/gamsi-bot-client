@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -6,19 +6,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { loginState } from '../states/login';
+import { loginOpenState } from '../states/loginOpen';
+import { requestsState } from '../states/requests';
+import { userState } from '../states/user';
 
-function Login({ finishSuccessfulLogin }) {
-  const [open, setOpen] = useState(false);
-  const [user, setUser] = useState({
-    username: '',
-    password: '',
-  });
+function Login() {
+  const setLogin = useSetRecoilState(loginState);
+  const setRequests = useSetRecoilState(requestsState);
+  const [open, setOpen] = useRecoilState(loginOpenState);
+  const [user, setUser] = useRecoilState(userState);
 
   const handleClickOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
 
-  const handleChange = event => setUser({ ...user, [event.target.name]: event.target.value });
+  const handleChange = event => setUser(user => ({ ...user, [event.target.name]: event.target.value }));
+
+  const finishSuccessfulLogin = async (jwt, response) => {
+    sessionStorage.setItem('jwt', jwt);
+    setLogin(true);
+    const personalRequests = await response.json();
+    setRequests(personalRequests.reverse());
+  };
 
   const tryLoginSecondPhase = async jwt => {
     const response = await fetch(process.env.REACT_APP_REQUEST_ENDPOINT, {

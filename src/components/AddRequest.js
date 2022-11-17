@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -6,20 +6,27 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { loginState } from '../states/login';
+import { requestState } from '../states/request';
+import { requestOpenState } from '../states/requestOpen';
+import { requestsState } from '../states/requests';
 
-function AddRequest({ login, finishSuccessfulRequest }) {
-  const [open, setOpen] = useState(false);
-  const [request, setRequest] = useState({
-    channelId: '',
-    targetSubscriberCount: 0,
-    emailAddress: '',
-  });
+function AddRequest() {
+  const login = useRecoilValue(loginState);
+  const [open, setOpen] = useRecoilState(requestOpenState);
+  const [request, setRequest] = useRecoilState(requestState);
+  const setRequests = useSetRecoilState(requestsState);
 
   const handleClickOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
 
-  const handleChange = event => setRequest({ ...request, [event.target.name]: event.target.value });
+  const handleChange = event => setRequest(request => ({ ...request, [event.target.name]: event.target.value }));
+
+  const finishSuccessfulRequest = request => {
+    alert('요청이 정상적으로 수락되었습니다');
+    setRequests(requests => [request, ...requests]);
+  };
 
   const alertMessageObject = messageObject => {
     let message = '';
