@@ -28,6 +28,7 @@ function Login() {
     setLogin(true);
     const personalRequests = await response.json();
     setRequests(personalRequests.reverse());
+    setOpen(false);
   };
 
   const tryLoginSecondPhase = async jwt => {
