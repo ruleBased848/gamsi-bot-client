@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Login from './Login';
+import Logout from './Logout';
 import { loginState } from '../states/login';
 
 function TopBar() {
@@ -12,7 +13,7 @@ function TopBar() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">Gamsi Bot</Typography>
-        {login ? null : <Login />}
+        {login ? <Logout /> : <Login />}
       </Toolbar>
     </AppBar>
   );
