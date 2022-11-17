@@ -59,43 +59,45 @@ function AddRequest() {
   };
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleClickOpen}>요청 추가</Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>새 요청</DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} mt={1}>
-            <TextField
-              label="유튜브 채널 ID"
-              name="channelId"
-              autoFocus
-              variant="standard"
-              value={request.channelId}
-              onChange={handleChange}
-            />
-            <TextField
-              label="목표 구독자 수"
-              type="number"
-              name="targetSubscriberCount"
-              variant="standard"
-              value={request.targetSubscriberCount}
-              onChange={handleChange}
-            />
-            <TextField
-              label="이메일 주소"
-              name="emailAddress"
-              variant="standard"
-              value={request.emailAddress}
-              onChange={handleChange}
-            />
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>닫기</Button>
-          <Button onClick={handleAdd}>추가</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Stack mt={2} mb={2}>
+      <div>
+        <Button variant="contained" onClick={handleClickOpen}>요청 추가</Button>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>새 요청</DialogTitle>
+          <DialogContent>
+            <Stack spacing={2} mt={1}>
+              <TextField
+                label="유튜브 채널 ID"
+                name="channelId"
+                autoFocus
+                variant="standard"
+                value={request.channelId}
+                onChange={handleChange}
+              />
+              <TextField
+                label="목표 구독자 수"
+                type="number"
+                name="targetSubscriberCount"
+                variant="standard"
+                value={request.targetSubscriberCount}
+                onChange={handleChange}
+              />
+              <TextField
+                label="이메일 주소"
+                name="emailAddress"
+                variant="standard"
+                value={request.emailAddress}
+                onChange={handleChange}
+              />
+            </Stack>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>닫기</Button>
+            <Button onClick={handleAdd}>추가</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </Stack>
   );
 }
 

@@ -1,9 +1,7 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { DataGrid } from '@mui/x-data-grid';
-import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Delete from '@mui/icons-material/Delete';
-import AddRequest from './AddRequest';
 import { loginState } from '../states/login';
 import { requestsState } from '../states/requests';
 
@@ -50,19 +48,14 @@ function RequestList() {
   ];
 
   return (
-    <>
-      <Stack mt={2} mb={2}>
-        <AddRequest />
-      </Stack>
-      <div style={{ height: 500, width: '100%' }}>
-        <DataGrid
-          rows={requests}
-          columns={columns}
-          disableSelectionOnClick={true}
-          getRowId={row => row.id}
-        />
-      </div>
-    </>
+    <div style={{ height: 500, width: '100%' }}>
+      <DataGrid
+        rows={requests}
+        columns={columns}
+        disableSelectionOnClick={true}
+        getRowId={row => row.id}
+      />
+    </div>
   );
 }
 
