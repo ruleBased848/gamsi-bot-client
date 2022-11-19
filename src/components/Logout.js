@@ -1,4 +1,4 @@
-import { useResetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
 import { loginState } from '../states/login';
 import { requestState } from '../states/request';
@@ -6,14 +6,14 @@ import { requestsState } from '../states/requests';
 import { userState } from '../states/user';
 
 function Logout() {
-  const resetLogin = useResetRecoilState(loginState);
+  const setLogin = useSetRecoilState(loginState);
   const resetRequest = useResetRecoilState(requestState);
   const resetRequests = useResetRecoilState(requestsState);
   const resetUser = useResetRecoilState(userState);
 
   const handleLogout = () => {
     sessionStorage.removeItem('jwt');
-    resetLogin();
+    setLogin(0);
     resetRequest();
     resetRequests();
     resetUser();

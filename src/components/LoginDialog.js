@@ -23,7 +23,7 @@ function LoginDialog() {
 
   const finishSuccessfulLogin = async (jwt, response) => {
     sessionStorage.setItem('jwt', jwt);
-    setLogin(true);
+    setLogin(1);
     const personalRequests = await response.json();
     setRequests(personalRequests.reverse());
     setOpen(false);

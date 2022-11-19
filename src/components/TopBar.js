@@ -13,7 +13,7 @@ function TopBar() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">Gamsi Bot</Typography>
-        {login ? <Logout /> : <Login />}
+        {login === 1 ? <Logout /> : <Login />}
       </Toolbar>
     </AppBar>
   );
