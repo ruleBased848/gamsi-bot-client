@@ -51,7 +51,7 @@ function AddRequest() {
   };
 
   const handleAdd = () => {
-    if (request.channelId.trim().length === 0) return alert('유튜브 채널 ID는 필수 항목입니다');
+    if (request.handle.trim().length === 0) return alert('유튜브 핸들은 필수 항목입니다');
     if (request.emailAddress.length === 0) return alert('이메일 주소는 필수 항목입니다');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(request.emailAddress)) return alert('이메일 주소의 형식이 올바르지 않습니다');
@@ -67,11 +67,11 @@ function AddRequest() {
           <DialogContent>
             <Stack spacing={2} mt={1}>
               <TextField
-                label="유튜브 채널 ID"
-                name="channelId"
+                label="유튜브 핸들(@ 제외)"
+                name="handle"
                 autoFocus
                 variant="standard"
-                value={request.channelId}
+                value={request.handle}
                 onChange={handleChange}
               />
               <TextField
