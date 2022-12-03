@@ -34,6 +34,7 @@ function RequestList() {
     { field: 'handle', headerName: '유튜브 핸들', width: 200, valueFormatter: ({ value }) => '@' + value },
     { field: 'targetSubscriberCount', headerName: '목표 구독자 수', width: 200 },
     { field: 'emailAddress', headerName: '이메일 주소', width: 200 },
+    { field: 'createdAt', headerName: '요청 일시', width: 200, valueFormatter: ({ value }) => new Date(value).toLocaleString() },
     {
       field: '',
       headerName: '',
