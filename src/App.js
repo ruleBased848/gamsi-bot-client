@@ -4,6 +4,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import LoginDialog from './components/LoginDialog';
 import LoginEffect from './components/LoginEffect';
 import RequestList from './components/RequestList';
+import SignupDialog from './components/SignupDialog';
 import TopBar from './components/TopBar';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <AddRequest />
       <RequestList />
       <LoginDialog />
+      <SignupDialog />
       <LoginEffect />
     </div>
   );

@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Login from './Login';
+import LoginAndSignup from './LoginAndSignup';
 import Logout from './Logout';
 import { loginState } from '../states/login';
 
@@ -13,7 +13,7 @@ function TopBar() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">Gamsi Bot</Typography>
-        {login === 1 ? <Logout /> : <Login />}
+        {login === 1 ? <Logout /> : <LoginAndSignup />}
       </Toolbar>
     </AppBar>
   );
