@@ -49,7 +49,7 @@ function RequestList() {
   ];
 
   return (
-    <div style={{ height: 500, width: '100%' }}>
+    <div style={{ width: '100%', flex: 1 }}>
       <DataGrid
         rows={requests}
         columns={columns}
