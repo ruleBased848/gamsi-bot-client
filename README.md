@@ -1,1 +1,1 @@
-# gamsi-bot-client
+# Gamsi Bot Client
